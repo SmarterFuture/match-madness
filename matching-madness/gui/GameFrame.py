@@ -44,7 +44,7 @@ class GameFrame(tk.Frame):
             self.__defiVacant.add(defi)
             self.__wordVacant.add(word)
 
-    def __cardHook(self, is_word: bool, card_id: int):
+    def __cardHook(self, is_word: bool, card_id: int) -> None:
         oldBut = [self.DEFI_CLICKED, self.WORD_CLICKED][is_word]
 
         if oldBut != None:
@@ -57,7 +57,7 @@ class GameFrame(tk.Frame):
 
         self.__checkPair()
 
-    def __checkPair(self):
+    def __checkPair(self) -> None:
         if self.DEFI_CLICKED == None or self.WORD_CLICKED == None:
             return
         
@@ -68,8 +68,8 @@ class GameFrame(tk.Frame):
         self.WORD_CLICKED = None
 
         if defiBut == wordBut:
-            defiBut.corrct()
-            wordBut.corrct()
+            defiBut.correct()
+            wordBut.correct()
             self.__defiVacant.add(defiBut)
             self.__wordVacant.add(wordBut)
             self.after(self.DELAY, self.populate)
@@ -78,14 +78,14 @@ class GameFrame(tk.Frame):
             defiBut.wrong()
             wordBut.wrong()
             
-            def normalise():
+            def normalise() -> None:
                 defiBut.click(True)
                 wordBut.click(True)
 
             self.after(self.DELAY, normalise)
 
 
-    def populate(self):
+    def populate(self) -> None:
         if self.__populationLock:
             return
         if 2 > len(self.__wordVacant):
