@@ -5,13 +5,15 @@ from typing import Callable
 
 class Card(Button):
     """Abstraction class for consistent UI/UX presentation. Main UI/UX building element
-        of GameFrame class
+    of GameFrame class
     """
 
     IS_TOGGLED = False
     COLORS = ["SystemButtonFace", "green"]
-    
-    def __init__(self, master: Misc, text: str, other: str, hook: Callable[[], None] ) -> None:
+
+    def __init__(
+        self, master: Misc, text: str, other: str, hook: Callable[[], None]
+    ) -> None:
         """Creates new Card object with hook to master class. Handling both pair values
             and UI/UX
 
@@ -27,7 +29,7 @@ class Card(Button):
         self.value = text
         self.__hook = hook
         super().__init__(self.__master, text=text, command=self.click)
-    
+
     def __eq__(self, other: object) -> bool:
         """Checks whether two Cards are pair, by compering their value "text" value
             (either "word" or "defi") with the "other" value of the other object
@@ -40,7 +42,7 @@ class Card(Button):
         """
         if not isinstance(other, Card):
             return False
-        return self.__other == other.value # type: ignore
+        return self.__other == other.value  # type: ignore
 
     def click(self, silent=False) -> None:
         """Handles clicks on the Card
@@ -63,7 +65,7 @@ class Card(Button):
     def wrong(self) -> None:
         """Handles UI/UX of incorrectly matched card"""
         self.config(bg="red")
-    
+
     def change(self, text: str, other: str) -> None:
         """In place rebuilds Card object, same as __init__(), with exception of using old
             "master" and "hook" values
@@ -73,4 +75,3 @@ class Card(Button):
             other (str): The pair value to the "text" value
         """
         self = self.__init__(self.master, text, other, self.__hook)
-

@@ -5,3 +5,5 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "matching-madness"
 version = "0.0.1"
+
+[tool.pyink]
