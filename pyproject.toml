@@ -5,6 +5,9 @@ description = "Project for CS class of my Tkinter implementation of Duolingo's m
 authors = ["SmarterFuture <anonymous.daisy.007@gmail.com>"]
 license = "MIT License"
 # readme = "README.md"
+include = [
+    { path = "./matching_madness/populate/data/", format = ["sdist", "wheel"] }
+]
 
 [tool.poetry.dependencies]
 python = "^3.12"

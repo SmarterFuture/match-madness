@@ -1,10 +1,11 @@
+from os import path
 from typing import Self, Tuple
 
 
 class BasePopulator:
     """Base class for all Populate objects"""
 
-    PWD = "./matching_madness/populate/data/"
+    PWD = path.join(path.dirname(__file__), "./data/")
     data = {}
     __iterable = iter(())
 
