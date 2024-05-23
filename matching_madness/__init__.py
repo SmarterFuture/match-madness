@@ -6,7 +6,6 @@ from .populate.json_methods import Populator
 def main():
     """This is main function, that runs whole application"""
     root = tk.Tk()
-    root.resizable(False, False)
     root.title("Matching Madness")
 
     population_method = iter(Populator("eng1.json"))
