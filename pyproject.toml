@@ -1,9 +1,18 @@
-[build-system]
-requires = ["setuptools"]
-build-backend = "setuptools.build_meta"
-
-[project]
+[tool.poetry]
 name = "matching-madness"
-version = "0.0.1"
+version = "0.1.0"
+description = "Project for CS class of my Tkinter implementation of Duolingo's matching madness"
+authors = ["SmarterFuture <anonymous.daisy.007@gmail.com>"]
+license = "MIT License"
+# readme = "README.md"
 
-[tool.pyink]
+[tool.poetry.dependencies]
+python = "^3.12"
+
+[tool.poetry.group.dev.dependencies]
+pylint = "^3.2.2"
+pyink = "^24.3.0"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

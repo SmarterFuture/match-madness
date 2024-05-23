@@ -1,5 +1,4 @@
-import tkinter as tk
-from tkinter import Misc, Button
+from tkinter import DISABLED, NORMAL, Misc, Button
 from typing import Callable
 
 
@@ -8,8 +7,8 @@ class Card(Button):
     of GameFrame class
     """
 
-    IS_TOGGLED = False
     COLORS = ["SystemButtonFace", "green"]
+    is_toggled = False
 
     def __init__(
         self, master: Misc, text: str, other: str, hook: Callable[[], None]
@@ -25,10 +24,9 @@ class Card(Button):
                 triggers
         """
         self.__master = master
-        self.__other = other
-        self.value = text
         self.__hook = hook
-        super().__init__(self.__master, text=text, command=self.click)
+        super().__init__(self.__master, text=text, command=self.click, fg="black")
+        self.change(text, other)
 
     def __eq__(self, other: object) -> bool:
         """Checks whether two Cards are pair, by compering their value "text" value
@@ -44,14 +42,18 @@ class Card(Button):
             return False
         return self.__other == other.value  # type: ignore
 
-    def click(self, silent=False) -> None:
+    def __hash__(self) -> int:
+        """Creates hash of object based on tk.Button.winfo_id"""
+        return hash(self.winfo_id)
+
+    def click(self, silent: bool = False) -> None:
         """Handles clicks on the Card
 
         Args:
-            silent: Whether or not hook function will be triggered
+            silent (bool): Whether or not hook function will be triggered
         """
-        self.IS_TOGGLED = not self.IS_TOGGLED
-        color = self.COLORS[self.IS_TOGGLED]
+        self.is_toggled = not self.is_toggled
+        color = self.COLORS[self.is_toggled]
         self.config(bg=color)
 
         if not silent:
@@ -60,7 +62,7 @@ class Card(Button):
     def correct(self) -> None:
         """Handles UI/UX of correctly matched card"""
         self.click(True)
-        self.config(state=tk.DISABLED)
+        self.config(state=DISABLED)
 
     def wrong(self) -> None:
         """Handles UI/UX of incorrectly matched card"""
@@ -74,4 +76,6 @@ class Card(Button):
             text (str): What will be displayed on the Card
             other (str): The pair value to the "text" value
         """
-        self = self.__init__(self.master, text, other, self.__hook)
+        self.__other = other
+        self.value = text
+        self.config(text=text, state=NORMAL)
