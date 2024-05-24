@@ -24,9 +24,10 @@ class Card(Button):
             hook (Callable[[], None]): Hook function to GameFrame class to handle pair
                 triggers
         """
-        self.__master = master
         self.__hook = hook
-        super().__init__(self.__master, text=text, command=self.click, fg="black")
+
+        super().__init__(master, text=text, command=self.click, fg="black")
+        self.bind("<Configure>", lambda _: self.__change_wrap)
         self.change(text, other)
 
     def __eq__(self, other: object) -> bool:
@@ -47,12 +48,35 @@ class Card(Button):
         """Creates hash of object based on tk.Button.winfo_id"""
         return hash(self.winfo_id)
 
+    def __change_wrap(self):
+        """Changes wraplength according to current width of Card"""
+        width = self.winfo_width() - 10
+        self.config(wraplength=width)
+
+    def change(self, text: str, other: str) -> None:
+        """In place rebuilds Card object, same as __init__(), with exception of using old
+            "master" and "hook" values, without re-initialization of Button
+
+        Args:
+            text (str): What will be displayed on the Card
+            other (str): The pair value to the "text" value
+        """
+        self.__other = other
+        self.value = text
+        self.is_toggled = False
+        color = self.COLORS[self.is_toggled]
+        self.config(bg=color, state=NORMAL, text=text)
+
     def click(self, silent: bool = False) -> None:
         """Handles clicks on the Card
 
         Args:
             silent (bool): Whether or not hook function will be triggered
         """
+        # This will ensure that after button is clicked, repressing won't do anything
+        if not silent and self.is_toggled:
+            return
+
         self.is_toggled = not self.is_toggled
         color = self.COLORS[self.is_toggled]
         self.config(bg=color)
@@ -69,17 +93,3 @@ class Card(Button):
         """Changes UI/UX of incorrectly matched card"""
         color = self.COLORS[2]
         self.config(bg=color)
-
-    def change(self, text: str, other: str) -> None:
-        """In place rebuilds Card object, same as __init__(), with exception of using old
-            "master" and "hook" values, without re-initialization of Button
-
-        Args:
-            text (str): What will be displayed on the Card
-            other (str): The pair value to the "text" value
-        """
-        self.__other = other
-        self.value = text
-        self.is_toggled = False
-        color = self.COLORS[self.is_toggled]
-        self.config(bg=color, state=NORMAL, text=text)

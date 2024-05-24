@@ -12,5 +12,11 @@ class JsonPopulator(BasePopulator):
         Args:
             file (str): Path to the file with game data
         """
+        self.data = {}
         with open(file, encoding="utf8") as raw_json:
             self.data = json.load(raw_json)
+
+        items = list(self.data.items())
+        for key, item in items:
+            if not isinstance(item, str):
+                self.data.pop(key)

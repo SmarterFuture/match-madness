@@ -153,6 +153,6 @@ class GameFrame(Frame):  # pylint: disable=R0902
             silent (bool): Whether informative dialog will be displayed
         """
         if not silent:
-            percent = self.__correct / self.__matched * 100
+            percent = round(self.__correct / self.__matched * 100, 2)
             messagebox.showinfo("Information", f"You finished with {percent}%")
         self.destroy()

@@ -9,7 +9,9 @@ class CsvPopulator(BasePopulator):
             raw_data = raw_file.read().split("\n")
 
         for line in raw_data:
-            if line == "":
+            line = line.split(",")
+            if line == [""] or len(line) != 2:
                 continue
-            word, definition = line.split(",")
+
+            word, definition = line
             self.data[word] = definition

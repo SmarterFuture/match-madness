@@ -103,7 +103,7 @@ class MainFrame(Frame):
         except FileNotFoundError:
             showerror(
                 title="Not found",
-                message="File you provided either was not found or it does not exists",
+                message="File you provided either was not found or it does not exist",
             )
         except NotImplementedError:
             showerror(
