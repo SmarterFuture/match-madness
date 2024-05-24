@@ -2,7 +2,7 @@ import json
 from matching_madness.populate.base_methods import BasePopulator
 
 
-class Populator(BasePopulator):
+class JsonPopulator(BasePopulator):
     """JSON based populator for populating GameFrame"""
 
     def __init__(self, file: str) -> None:

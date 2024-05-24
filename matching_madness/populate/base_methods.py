@@ -1,4 +1,5 @@
 from os import path
+from random import shuffle
 from typing import Self, Tuple
 
 
@@ -16,8 +17,10 @@ class BasePopulator:
         return max_value / len(self.data)
 
     def __iter__(self) -> Self:
-        """Creates iterator out of key-item pair dict"""
-        self.__iterable = iter(self.data.items())
+        """Creates randomised iterator out of key-item pair dict"""
+        items = list(self.data.items())
+        shuffle(items)
+        self.__iterable = iter(items)
         return self
 
     def __next__(self) -> Tuple[str, str]:
