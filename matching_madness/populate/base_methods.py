@@ -7,14 +7,14 @@ DATA_LIB = path.join(path.dirname(__file__), "./data/")
 
 
 class BasePopulator:
-    """Base object Populators"""
+    """Base object for Populators"""
 
     data = {}
     __iterable = iter(())
 
     def normalised_step(self, max_value=100):
         """Returns value of unit in 100 point scale"""
-        return max_value / len(self.data)
+        return max_value / max(0, len(self.data))
 
     def __iter__(self) -> Self:
         """Creates randomised iterator out of key-item pair dict"""

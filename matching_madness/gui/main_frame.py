@@ -14,10 +14,17 @@ from matching_madness.populate.json_methods import JsonPopulator
 
 
 class MainFrame(Frame):
+    """Main game object that handles anything within it"""
+
     __game_frame = None
     FILETYPES = [("JSON files", "*.json"), ("CSV files", "*.csv")]
 
     def __init__(self, master: Misc) -> None:
+        """Creates MainFrame and places it onto master
+
+        Args:
+            master (Misc): Master window
+        """
         super().__init__(master, height=600, width=400)
         self.put()
 
@@ -44,37 +51,21 @@ class MainFrame(Frame):
             relx=col, rely=3 * space + 2 * height, relheight=height, relwidth=width
         )
 
-    def put(self):
-        if self.winfo_exists() == 0:
-            return
-
-        self.pack(expand=1, fill="both")
-        self.update()
-
-    def __get_data(self) -> Iterable[str]:
-        dir_files = listdir(DATA_LIB)
-        for file in dir_files:
-            file = join(DATA_LIB, file)
-            if isfile(file):
-                yield file
-
-    def __eng_populator(self) -> JsonPopulator:
-        eng_files = list(
-            filter(lambda x: search(r".*eng\d+\.json$", x), self.__get_data())
-        )
-        file = choice(eng_files)
-        return JsonPopulator(file)
-
-    def __esp_populator(self) -> JsonPopulator:
-        esp_files = list(
-            filter(lambda x: search(r".*esp\d+\.json$", x), self.__get_data())
-        )
-        file = choice(esp_files)
-        return JsonPopulator(file)
-
     def __custom_populator(self, file: str) -> BasePopulator:
+        """Creates custom Populator from provided file
+
+        Args:
+            file (str): Absolute path to custom game file
+
+        Returns:
+            BasePopulator: Custom Populator from either .csv or .json file
+
+        Raises:
+            FileNotFoundError: Specified file does not exist
+            NotImplementedError: File format is not supported
+        """
         if not isfile(file):
-            raise FileNotFoundError("File does not exists")
+            raise FileNotFoundError
 
         file_ext = file.split(".")[-1].lower()
         if file_ext == "json":
@@ -83,14 +74,34 @@ class MainFrame(Frame):
         if file_ext == "csv":
             return CsvPopulator(file)
 
-        raise NotImplementedError("File format is not supported")
+        raise NotImplementedError
 
-    def __gen_game(self, populator: BasePopulator):
-        self.pack_forget()
-        self.__game_frame = GameFrame(self.__master, populator)
-        self.__game_frame.bind("<Destroy>", lambda _: self.put())
+    def __eng_populator(self) -> JsonPopulator:
+        """Creates populator from random file within ../populate/data/ directory
+
+        Returns:
+            JsonPopulator: Created Populator for English -> Slovak game
+        """
+        eng_files = list(
+            filter(lambda x: search(r".*eng\d+\.json$", x), self.__get_data())
+        )
+        file = choice(eng_files)
+        return JsonPopulator(file)
+
+    def __esp_populator(self) -> JsonPopulator:
+        """Creates populator from random file within ../populate/data/ directory
+
+        Returns:
+            JsonPopulator: Created Populator for Spanish -> English game
+        """
+        esp_files = list(
+            filter(lambda x: search(r".*esp\d+\.json$", x), self.__get_data())
+        )
+        file = choice(esp_files)
+        return JsonPopulator(file)
 
     def __gen_custom_game(self):
+        """Generates custom game or provides information for user about how it failed"""
         file = askopenfilename(
             title="Select custom file", initialdir="$HOME", filetypes=self.FILETYPES
         )
@@ -109,3 +120,33 @@ class MainFrame(Frame):
             showerror(
                 title="Wrong filetype", message="File you provided is of wrong filetype"
             )
+
+    def __get_data(self) -> Iterable[str]:
+        """Looks into ../populate/data/
+
+        Returns:
+            Iterable[str]: Full path to file within ../populate/data/ location
+        """
+        dir_files = listdir(DATA_LIB)
+        for file in dir_files:
+            file = join(DATA_LIB, file)
+            if isfile(file):
+                yield file
+
+    def __gen_game(self, populator: BasePopulator):
+        """Generates game populated by Populator
+
+        Args:
+            populator (BasePopulator): Used to populate game
+        """
+        self.pack_forget()
+        self.__game_frame = GameFrame(self.__master, populator)
+        self.__game_frame.bind("<Destroy>", lambda _: self.put())
+
+    def put(self):
+        """Places / unhides MainFrame onto master"""
+        if self.winfo_exists() == 0:
+            return
+
+        self.pack(expand=1, fill="both")
+        self.update()
