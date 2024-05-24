@@ -3,11 +3,12 @@ from typing import Callable
 
 
 class Card(Button):
-    """Abstraction class for consistent UI/UX presentation. Main UI/UX building element
+    """Ensure consistent UI/UX design. Main UI/UX building element
     of GameFrame class
     """
 
-    COLORS = ["SystemButtonFace", "green"]
+    # colors are in order: normal, clicked, incorrect, correct
+    COLORS = ["SystemButtonFace", "blue", "red", "green"]
     is_toggled = False
 
     def __init__(
@@ -60,17 +61,18 @@ class Card(Button):
             self.__hook()
 
     def correct(self) -> None:
-        """Handles UI/UX of correctly matched card"""
-        self.click(True)
-        self.config(state=DISABLED)
+        """Changes UI/UX of correctly matched card"""
+        color = self.COLORS[3]
+        self.config(bg=color, state=DISABLED)
 
     def wrong(self) -> None:
-        """Handles UI/UX of incorrectly matched card"""
-        self.config(bg="red")
+        """Changes UI/UX of incorrectly matched card"""
+        color = self.COLORS[2]
+        self.config(bg=color)
 
     def change(self, text: str, other: str) -> None:
         """In place rebuilds Card object, same as __init__(), with exception of using old
-            "master" and "hook" values
+            "master" and "hook" values, without re-initialization of Button
 
         Args:
             text (str): What will be displayed on the Card
@@ -78,4 +80,6 @@ class Card(Button):
         """
         self.__other = other
         self.value = text
-        self.config(text=text, state=NORMAL)
+        self.is_toggled = False
+        color = self.COLORS[self.is_toggled]
+        self.config(bg=color, state=NORMAL, text=text)

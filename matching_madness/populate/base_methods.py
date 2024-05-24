@@ -2,10 +2,12 @@ from os import path
 from typing import Self, Tuple
 
 
-class BasePopulator:
-    """Base class for all Populate objects"""
+DATA_LIB = path.join(path.dirname(__file__), "./data/")
 
-    PWD = path.join(path.dirname(__file__), "./data/")
+
+class BasePopulator:
+    """Base object Populators"""
+
     data = {}
     __iterable = iter(())
 

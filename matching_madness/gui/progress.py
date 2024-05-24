@@ -3,7 +3,7 @@ from tkinter.ttk import Progressbar
 
 
 class Progress(Progressbar):  # pylint: disable=R0901
-    """Wrapper class for more convenient working with ttk.Progressbar"""
+    """Wrapper for more convenient working with ttk.Progressbar"""
 
     def __init__(self, master: Misc) -> None:
         """Creates Progressbar and sets up value attribute

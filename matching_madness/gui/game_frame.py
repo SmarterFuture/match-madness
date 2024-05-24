@@ -8,7 +8,7 @@ from matching_madness.gui.card import Card
 
 
 class GameFrame(Frame):  # pylint: disable=R0902
-    """Abstraction class for simplifying game creation and its process"""
+    """Simplifies game creation and its process"""
 
     DELAY = 1000  # in ms
     defi_clicked = None
@@ -37,12 +37,13 @@ class GameFrame(Frame):  # pylint: disable=R0902
         sec_col = 0.6
         height = 0.1
         width = 0.2
+        but_height = 20
 
         self.__progress = Progress(self)
         self.__progress.place(relx=fir_col, rely=0.1, relwidth=sec_col, relheight=0.05)
 
         Button(self, text="X", command=self.kill).place(
-            relx=1 - height, rely=0, relwidth=height
+            relx=1, rely=0, width=but_height, height=but_height, anchor="ne"
         )
 
         self.__defi_buttons: List[Card] = []
@@ -67,7 +68,7 @@ class GameFrame(Frame):  # pylint: disable=R0902
         self.populate()
 
     def __card_hook(self, is_word: bool, card_id: int) -> None:
-        """Hook function used by Card objects to trigger pair handler
+        """Hook used by Card objects to trigger pair handler
 
         Args:
             is_word (bool): Whether given card is considered "word" or "definition"
@@ -124,7 +125,7 @@ class GameFrame(Frame):  # pylint: disable=R0902
             self.after(self.DELAY, normalise)
 
     def populate(self) -> None:
-        """Handles populating cards and randomization of "word" "definition" positions"""
+        """Populates cards and randomization of "word" "definition" positions"""
         if self.__population_lock or 2 > len(self.__word_vacant):
             return
 
@@ -146,7 +147,7 @@ class GameFrame(Frame):  # pylint: disable=R0902
         self.__word_vacant = []
 
     def kill(self, silent: bool = True) -> None:
-        """Handles closing of current GameFrame object
+        """Closes of current GameFrame object
 
         Args:
             silent (bool): Whether informative dialog will be displayed
