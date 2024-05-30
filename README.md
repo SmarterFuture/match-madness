@@ -1,6 +1,8 @@
-# CS project - Matching madness
+# CS project - Match madness
 
-Matching madness is a game / exercise in Duolingo. It is a game where you are supposed to match word in language you are trying to learn to its translation within the given time period.
+Match madness is a game / exercise in Duolingo. It is a game where you are supposed to match word in language you are trying to learn to its translation within the given time period.
+
+![](./assets/intro_screen.jpg) ![](./assets/gameplay.mp4)
 
 I have decided to implement something for my CS year-end project. For my implementation I have decided on few modification from Duolingo's implementation:
 - User will have unlimited time for completing the game
@@ -11,14 +13,14 @@ I have decided to implement something for my CS year-end project. For my impleme
 Download the `.whl` file from release and run
 ```bash
 python3 -m pip install /path/to/file/*.whl
-python3 -m matching_madness
+python3 -m match_madness
 ```
 The module has been written for `python@3.12` or newer
 
 ## Documentation
 
 The game is trying to be as user-friendly as possible. Although developers may be interested in reading the supplementary documents:
-- [DOCUMENTATION](./DOCUMENTATION.md)
+- [DOCUMENTATION](./assets/DOCUMENTATION.md)
 
 ## CS project specification
 
@@ -48,3 +50,6 @@ The game is trying to be as user-friendly as possible. Although developers may b
     - [x] Output elements are protected against user input
 - [x] Real life use-case
     - Program can be used in real life without further modifications
+
+If you are interested in you can read whole specification in this supplementary document:
+- [SPECIFICATION (SK)](./assets/SPECIFICATION-sk.pdf)

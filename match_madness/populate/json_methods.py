@@ -1,5 +1,5 @@
 import json
-from matching_madness.populate.base_methods import BasePopulator
+from match_madness.populate.base_methods import BasePopulator
 
 
 class JsonPopulator(BasePopulator):

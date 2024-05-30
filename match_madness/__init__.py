@@ -1,6 +1,6 @@
 import tkinter as tk
 
-from matching_madness.gui.main_frame import MainFrame
+from match_madness.gui.main_frame import MainFrame
 
 
 def main():

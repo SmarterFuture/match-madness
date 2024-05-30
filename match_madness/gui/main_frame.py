@@ -7,10 +7,10 @@ from tkinter.filedialog import askopenfilename
 from tkinter.messagebox import showerror
 from typing import Iterable
 
-from matching_madness.gui.game_frame import GameFrame
-from matching_madness.populate.base_methods import DATA_LIB, BasePopulator
-from matching_madness.populate.csv_methods import CsvPopulator
-from matching_madness.populate.json_methods import JsonPopulator
+from match_madness.gui.game_frame import GameFrame
+from match_madness.populate.base_methods import DATA_LIB, BasePopulator
+from match_madness.populate.csv_methods import CsvPopulator
+from match_madness.populate.json_methods import JsonPopulator
 
 
 class MainFrame(Frame):

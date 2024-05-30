@@ -2,9 +2,9 @@ from tkinter import Button, Frame, messagebox, Misc
 from typing import List
 from random import shuffle
 
-from matching_madness.gui.progress import Progress
-from matching_madness.populate.base_methods import BasePopulator
-from matching_madness.gui.card import Card
+from match_madness.gui.progress import Progress
+from match_madness.populate.base_methods import BasePopulator
+from match_madness.gui.card import Card
 
 
 class GameFrame(Frame):  # pylint: disable=R0902

@@ -6,7 +6,7 @@ authors = ["SmarterFuture <anonymous.daisy.007@gmail.com>"]
 license = "MIT License"
 # readme = "README.md"
 include = [
-    { path = "./matching_madness/populate/data/", format = ["sdist", "wheel"] }
+    { path = "./match_madness/populate/data/", format = ["sdist", "wheel"] }
 ]
 
 [tool.poetry.dependencies]
