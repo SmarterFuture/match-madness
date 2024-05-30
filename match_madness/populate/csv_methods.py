@@ -4,7 +4,6 @@ from match_madness.populate.base_methods import BasePopulator
 class CsvPopulator(BasePopulator):
     """CSV based populator for populating GameFrame"""
 
-
     def __init__(self, file: str) -> None:
         """Creates Populator object used to populate GameFrame and provide additional
             information about loaded data

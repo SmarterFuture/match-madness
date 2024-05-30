@@ -35,7 +35,7 @@ The game is trying to be as user-friendly as possible. Although developers may b
     - [x] Get input from GUI element
     - [x] Load data from a file
 - [ ] Data output
-    - [ ] Return data through GUI element
+    - [x] Return data through GUI element
     - [ ] Write output data to a file
 - [x] Problem decomposition
     - Problem is correctly decomposed
@@ -44,10 +44,10 @@ The game is trying to be as user-friendly as possible. Although developers may b
     - Functions are documented according to [Google standard](https://google.github.io/styleguide/pyguide.html)
 - [ ] Graphical user interface
     - [x] GUI is clear
-    - [ ] Input and output elements are clearly separated
+    - [x] Input and output elements are clearly separated
     - [x] Output elements are protected against user input
 - [x] Real life use-case
     - Program can be used in real life without further modifications
 
-If you are interested, you can read whole specification in this supplementary document:
+If you are interested, you can read the whole specification in this supplementary document:
 - [SPECIFICATION (SK)](./assets/SPECIFICATION-sk.pdf)

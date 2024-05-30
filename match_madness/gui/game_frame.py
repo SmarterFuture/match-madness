@@ -2,9 +2,10 @@ from tkinter import Button, Frame, messagebox, Misc
 from typing import List
 from random import shuffle
 
-from match_madness.gui.progress import Progress
 from match_madness.populate.base_methods import BasePopulator
 from match_madness.gui.card import Card
+from match_madness.gui.combo import Combo
+from match_madness.gui.progress import Progress
 
 
 class GameFrame(Frame):  # pylint: disable=R0902
@@ -40,7 +41,10 @@ class GameFrame(Frame):  # pylint: disable=R0902
         but_height = 20
 
         self.__progress = Progress(self)
-        self.__progress.place(relx=fir_col, rely=0.1, relwidth=sec_col, relheight=0.05)
+        self.__progress.place(relx=fir_col, rely=0.09, relwidth=sec_col, relheight=0.05)
+
+        self.__combo = Combo(self)
+        self.__combo.place(relx=fir_col, rely=0.14)
 
         Button(self, text="X", command=self.kill).place(
             relx=1, rely=0, width=but_height, height=but_height, anchor="ne"
@@ -52,7 +56,7 @@ class GameFrame(Frame):  # pylint: disable=R0902
         self.__word_vacant: List[Card] = []
 
         for i in range(5):
-            rely = 0.2 + i * 0.15
+            rely = 0.21 + i * 0.15
 
             word = Card(self, "", "", lambda i=i: self.__card_hook(True, i))
             word.place(relx=fir_col, rely=rely, relheight=height, relwidth=width)
@@ -100,6 +104,7 @@ class GameFrame(Frame):  # pylint: disable=R0902
 
         if defi_but == word_but:
             self.__correct += 1
+            self.__combo.plus_one()
 
             defi_but.correct()
             word_but.correct()
@@ -108,12 +113,14 @@ class GameFrame(Frame):  # pylint: disable=R0902
             self.__word_vacant.append(word_but)
 
             self.__progress.step(self.__step)
-            if self.__progress.value == 100:
+            if self.__progress.value > 99.99:
                 self.kill(False)
 
             self.after(self.DELAY, self.populate)
 
         else:
+            self.__combo.set(0)
+
             defi_but.wrong()
             word_but.wrong()
 
@@ -154,5 +161,9 @@ class GameFrame(Frame):  # pylint: disable=R0902
         """
         if not silent:
             percent = round(self.__correct / self.__matched * 100, 2)
-            messagebox.showinfo("Information", f"You finished with {percent}%")
+            combo_max = self.__combo.max
+            messagebox.showinfo(
+                "Information",
+                f"You finished with {percent}%\nYour max combo was {combo_max}x",
+            )
         self.destroy()
