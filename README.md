@@ -2,8 +2,6 @@
 
 Match madness is a game / exercise in Duolingo. It is a game where you are supposed to match word in language you are trying to learn to its translation within the given time period.
 
-![](./assets/intro_screen.jpg) ![](./assets/gameplay.mp4)
-
 I have decided to implement something for my CS year-end project. For my implementation I have decided on few modification from Duolingo's implementation:
 - User will have unlimited time for completing the game
 - User can create and run their own game from specified file 
