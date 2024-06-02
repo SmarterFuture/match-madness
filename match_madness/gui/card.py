@@ -1,5 +1,5 @@
 from tkinter import DISABLED, NORMAL, Misc, Button
-from typing import Callable
+from typing import Callable, Self, Tuple
 
 
 class Card(Button):
@@ -11,9 +11,7 @@ class Card(Button):
     COLORS = ["SystemButtonFace", "blue", "red", "green"]
     is_toggled = False
 
-    def __init__(
-        self, master: Misc, text: str, other: str, hook: Callable[[], None]
-    ) -> None:
+    def __init__(self, master: Misc, text: str, other: str, hook: Callable[[], None]) -> None:
         """Creates new Card object with hook to master class. Handling both pair values
             and UI/UX
 
@@ -88,6 +86,20 @@ class Card(Button):
         """Changes UI/UX of correctly matched card"""
         color = self.COLORS[3]
         self.config(bg=color, state=DISABLED)
+
+    def log(self, other: Self) -> Tuple[str, str, str]:
+        """Builds log based on matched pair
+
+        Args:
+            other (Self): Other clicked card
+
+        Returns:
+            Tuple[str, str, str]: Returns values of cards in order:
+                value of current card
+                value of other card
+                pair to current card
+        """
+        return self.value, other.value, self.__other
 
     def wrong(self) -> None:
         """Changes UI/UX of incorrectly matched card"""

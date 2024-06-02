@@ -2,6 +2,7 @@ from tkinter import Button, Frame, messagebox, Misc
 from typing import List
 from random import shuffle
 
+from match_madness.logger.logger import Logger
 from match_madness.populate.base_methods import BasePopulator
 from match_madness.gui.card import Card
 from match_madness.gui.combo import Combo
@@ -26,6 +27,8 @@ class GameFrame(Frame):  # pylint: disable=R0902
         """
         super().__init__(master, height=600, width=400)
         self.pack(expand=1, fill="both")
+
+        self.__logger = Logger()
 
         self.__matched = 0
         self.__correct = 0
@@ -120,6 +123,7 @@ class GameFrame(Frame):  # pylint: disable=R0902
 
         else:
             self.__combo.set(0)
+            self.__logger.write(*word_but.log(defi_but))
 
             defi_but.wrong()
             word_but.wrong()
@@ -159,11 +163,13 @@ class GameFrame(Frame):  # pylint: disable=R0902
         Args:
             silent (bool): Whether informative dialog will be displayed
         """
+        log_path = self.__logger.close()
         if not silent:
             percent = round(self.__correct / self.__matched * 100, 2)
             combo_max = self.__combo.max
             messagebox.showinfo(
                 "Information",
-                f"You finished with {percent}%\nYour max combo was {combo_max}x",
+                f"You finished with {percent}%\nYour max combo was {combo_max}x\n\
+                    Log file can be found at: {log_path}",
             )
         self.destroy()

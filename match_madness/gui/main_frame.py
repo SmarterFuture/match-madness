@@ -82,9 +82,7 @@ class MainFrame(Frame):
         Returns:
             JsonPopulator: Created Populator for English -> Slovak game
         """
-        eng_files = list(
-            filter(lambda x: search(r".*eng\d+\.json$", x), self.__get_data())
-        )
+        eng_files = list(filter(lambda x: search(r".*eng\d+\.json$", x), self.__get_data()))
         file = choice(eng_files)
         return JsonPopulator(file)
 
@@ -94,17 +92,13 @@ class MainFrame(Frame):
         Returns:
             JsonPopulator: Created Populator for Spanish -> English game
         """
-        esp_files = list(
-            filter(lambda x: search(r".*esp\d+\.json$", x), self.__get_data())
-        )
+        esp_files = list(filter(lambda x: search(r".*esp\d+\.json$", x), self.__get_data()))
         file = choice(esp_files)
         return JsonPopulator(file)
 
     def __gen_custom_game(self):
         """Generates custom game or provides information for user about how it failed"""
-        file = askopenfilename(
-            title="Select custom file", initialdir="$HOME", filetypes=self.FILETYPES
-        )
+        file = askopenfilename(title="Select custom file", initialdir="$HOME", filetypes=self.FILETYPES)
         file = abspath(file)
         if file is None:
             return
@@ -117,9 +111,7 @@ class MainFrame(Frame):
                 message="File you provided either was not found or it does not exist",
             )
         except NotImplementedError:
-            showerror(
-                title="Wrong filetype", message="File you provided is of wrong filetype"
-            )
+            showerror(title="Wrong filetype", message="File you provided is of wrong filetype")
 
     def __get_data(self) -> Iterable[str]:
         """Looks into ../populate/data/

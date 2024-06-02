@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "match-madness"
-version = "0.2.0"
+version = "1.0.0"
 description = "Project for CS class of my Tkinter implementation of Duolingo's matching madness"
 authors = ["SmarterFuture <anonymous.daisy.007@gmail.com>"]
 license = "MIT License"
@@ -8,6 +8,9 @@ license = "MIT License"
 include = [
     { path = "./match_madness/populate/data/", format = ["sdist", "wheel"] }
 ]
+
+[tool.pyink]
+line-length = 120
 
 [tool.poetry.dependencies]
 python = "^3.12"

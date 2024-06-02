@@ -14,7 +14,7 @@ class BasePopulator:
 
     def normalised_step(self, max_value=100):
         """Returns value of unit in 100 point scale"""
-        return max_value / max(0, len(self.data))
+        return max_value / max(1, len(self.data))
 
     def __iter__(self) -> Self:
         """Creates randomised iterator out of key-item pair dict"""

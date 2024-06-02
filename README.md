@@ -26,23 +26,23 @@ The game is trying to be as user-friendly as possible. Although developers may b
     - Algorithm contains nested cycles and branching
 - [x] Data types
     - Project combines and uses multiple data types
-- [ ] Error prevention
-    - [ ] Input requirements are tested
-    - [ ] IO data operation are tested
+- [x] Error prevention
+    - [x] Input requirements are tested
+    - [x] IO data operation are tested
 - [x] Error handling
     - User is informed about problem with GUI element
 - [x] Data input
     - [x] Get input from GUI element
     - [x] Load data from a file
-- [ ] Data output
+- [x] Data output
     - [x] Return data through GUI element
-    - [ ] Write output data to a file
+    - [x] Write output data to a file
 - [x] Problem decomposition
     - Problem is correctly decomposed
     - Logical units are independent functions
 - [x] Code
     - Functions are documented according to [Google standard](https://google.github.io/styleguide/pyguide.html)
-- [ ] Graphical user interface
+- [x] Graphical user interface
     - [x] GUI is clear
     - [x] Input and output elements are clearly separated
     - [x] Output elements are protected against user input
