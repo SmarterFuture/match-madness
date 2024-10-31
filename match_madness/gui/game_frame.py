@@ -158,7 +158,7 @@ class GameFrame(Frame):  # pylint: disable=R0902
         self.__word_vacant = []
 
     def kill(self, silent: bool = True) -> None:
-        """Closes of current GameFrame object
+        """Closes current GameFrame object
 
         Args:
             silent (bool): Whether informative dialog will be displayed
